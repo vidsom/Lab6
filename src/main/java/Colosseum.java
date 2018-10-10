@@ -16,7 +16,10 @@ public class Colosseum {
      * The maximum number of hit points we will allow a Pokemon to start with.
      */
     static final int MAX_HIT_POINTS = 50;
-
+    /**
+     * The maximum defense level.
+     */
+    static final int MAX_DEFENSE_LEVEL = 23;
     /**
      * The maximum number of rounds we will let the Pokemon battle.
      */
@@ -102,8 +105,41 @@ public class Colosseum {
      * (Look, we can return objects too!)
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        printTypeMenu();
+
+        System.out.println("Please name your pokemon:");
+        String setName = myScan.nextLine();
+
+        System.out.println("How many hit points will it have?");
+        int setHitPoints = myScan.nextInt();
+        while (setHitPoints < 1 || setHitPoints > MAX_HIT_POINTS) {
+            System.out.println("Sorry. Hit points must be between 1 and 50:");
+            setHitPoints = myScan.nextInt();
+        }
+
+        System.out.println("Split fifty points between attack level and defense level");
+
+        System.out.println("Enter your attack level (1-49):");
+        int setAttackLevel = myScan.nextInt();
+        while (setAttackLevel < 1 || setAttackLevel > MAX_HIT_POINTS - 1) {
+            System.out.println("Sorry. The attack level must be between 1 and 49:");
+            setAttackLevel = myScan.nextInt();
+        }
+
+        System.out.println("Enter your defense level (1-23):");
+        int setDefenseLevel = myScan.nextInt();
+        while ((setDefenseLevel < 1 || setDefenseLevel > MAX_DEFENSE_LEVEL)
+                || setDefenseLevel + setAttackLevel != MAX_HIT_POINTS) {
+            System.out.println("Sorry. The defense level must be between 1 and 23:");
+            setDefenseLevel = myScan.nextInt();
+        }
+
+        Pokemon tempPokemon = new Pokemon();
+        tempPokemon.setName(setName);
+        tempPokemon.setAttackLevel(setAttackLevel);
+        tempPokemon.setHitPoints(setHitPoints);
+        tempPokemon.setDefenseLevel(setDefenseLevel);
+        return tempPokemon;
     }
 
     /**
